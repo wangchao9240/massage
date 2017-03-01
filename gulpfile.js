@@ -56,7 +56,7 @@ gulp.task('css', function () {
 
 // 监听HCJ文件，变动则启动刷新浏览器机制 
 gulp.task('watch', function () {
-  gulp.watch(['./src/page/**/*'], ['html', 'js', 'css', 'sass']);
+  gulp.watch(['./src/page/**/*'], ['html', 'js', 'sass', 'css']);
 });
  
 gulp.task('default', ['connect', 'watch']);

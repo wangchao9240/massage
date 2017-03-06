@@ -14,24 +14,24 @@ gulp.task('connect', function() {
 
 // 编译sass文件
 gulp.task('sass', function () {
-  return gulp.src('./src/page/**/*.scss')
+  return gulp.src('./src/page/account/*.scss')
     .pipe(sass().on('error', sass.logError))
     .pipe(autoprefixer({
       browsers: ["last 2 version", "> 10%", "> 5% in US", "ie 8", "ie 7"],
       cascade: false
     }))
-    .pipe(gulp.dest('./src/page/'));
+    .pipe(gulp.dest('./src/page/account/'));
 });
 
 // ./src/page所有文件夹下，html后缀文件绑定自动刷新功能
 gulp.task('html', function () {
-  gulp.src('./src/page/**/*.html')
+  gulp.src('./src/page/account/*.html')
     .pipe(connect.reload());
 });
 
 // ./src/page所有文件夹下，js后缀文件绑定自动刷新功能
 gulp.task('js', function () {
-  gulp.src('./src/page/**/*.js')
+  gulp.src('./src/page/account/*.js')
     .pipe(eslint({
         rules: {
           // allow paren-less arrow functions
@@ -50,13 +50,13 @@ gulp.task('js', function () {
 
 // ./src/page所有文件夹下，css后缀文件绑定自动刷新功能
 gulp.task('css', function () {
-  gulp.src('./src/page/**/*.css')
+  gulp.src('./src/page/account/*.css')
     .pipe(connect.reload());
 });
 
 // 监听HCJ文件，变动则启动刷新浏览器机制 
 gulp.task('watch', function () {
-  gulp.watch(['./src/page/**/*'], ['html', 'js', 'sass', 'css']);
+  gulp.watch(['./src/page/account/*'], ['html', 'js', 'sass', 'css']);
 });
  
 gulp.task('default', ['connect', 'watch']);

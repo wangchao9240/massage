@@ -22,14 +22,22 @@ $(document).ready(function() {
 
         // 根据rating数来设置星星并添加至dom元素中
         appendStars(item.stars, $('.stars').last());
-      })
+        
+      });
       // 根据手机窗口获取文字溢出的合适宽度
       $('.detail .summary').width($(window).width() - 85);
+      
+      //	跳转页面
+			$(".item").click(function() {
+				window.location.href="../expert/expert.html";
+			});
     },
     error: function() {
       alert('啊哦，网络开小差了');
     }
   });
+  
+
 });
 
 // 根据传入的参数展现星星的样子并添加至dom元素中

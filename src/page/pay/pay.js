@@ -1,13 +1,6 @@
 $(document).ready(function() {
-  // 请求数据获取用户当前余额
-  $.ajax({
-    url: 'pay.json',
-    type: 'GET',
-    success: function(data) {
-      console.log(data);
-      $('.title .right').html('￥' + data.balance);
-    }
-  });
+  // 从本地存储中获取用户当前余额
+  $('.title .right').html('￥' + localStorage.price);
 
   $('ul').delegate('.pay', 'click', function(e) {
     // 找到当前点击的元素，先将所有背景图变为未选中状态，后将

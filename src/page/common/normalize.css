@@ -11,7 +11,7 @@
    ========================================================================== */
 
 html {
-  font-family: "PingFang SC", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; /* 1 */
+  font-family: "PingFang-SC-Regular", "Helvetica Neue", Helvetica, Arial, "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif; /* 1 */
   line-height: 1.15; /* 2 */
   -ms-text-size-adjust: 100%; /* 3 */
   -webkit-text-size-adjust: 100%; /* 3 */
@@ -458,4 +458,15 @@ template {
 
 [hidden] {
   display: none;
+}
+
+ul, li {
+  margin: 0;
+  padding: 0;
+}
+li {
+  list-style: none;
+}
+*{
+	box-sizing: border-box;
 }

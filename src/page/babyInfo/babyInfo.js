@@ -36,7 +36,8 @@ $(document).ready(function() {
   });
 
   // 匹配日期的正则表达式
-  $('.submitBtn').click(function() {
+  $('.submitBtn').click(function(e) {
+  	e.preventDefault();
     var date = $('.time').get(0).innerHTML;
     //将日期字符串格式化为日期数组
     var canISave = true;
@@ -61,7 +62,9 @@ $(document).ready(function() {
 	    	birth: babyBirth
 	    };
 	    localStorage.babyInfo = JSON.stringify(babyInfo);
-    	window.location.href = '../account/account.html';
+//  	window.location.href = '../account/account.html';
+
+		window.history.back();
     }
     
   });

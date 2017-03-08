@@ -6,6 +6,7 @@ body, html {
   height: 100%;
   background-color: #ebebeb; }
   .optionWrapper .itemWrapper {
+		position: relative;
     display: -ms-flexbox;
     display: flex;
     -ms-flex-pack: justify;
@@ -32,10 +33,15 @@ body, html {
         margin-bottom: 10px; }
         .optionWrapper .itemWrapper .babyWrapper > li:last-child {
           margin-bottom: 0; }
-      .optionWrapper .itemWrapper .babyWrapper .tip {
-        font-size: 12px; }
       .optionWrapper .itemWrapper .babyWrapper .title {
         margin-right: 5px; }
+	    .optionWrapper .itemWrapper .tip {
+	    	font-size: 12px;
+	    	color: #999;
+	    	position: absolute;
+	    	top: 50%;
+				margin-top: -6px;
+	    	right: 13%; }
     .optionWrapper .itemWrapper .icon_pos {
       -ms-flex: 0 0 14px;
       flex: 0 0 14px;

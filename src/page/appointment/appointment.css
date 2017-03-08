@@ -72,14 +72,14 @@ html, body {
       .appointWrapper .appointContent .infoWrapper .wrapper {
         overflow: hidden; }
       .appointWrapper .appointContent .infoWrapper .introduce {
+      	line-height: 22px;
         margin: 0;
         font-size: 13px;
         color: #808080; }
       .appointWrapper .appointContent .infoWrapper .tip {
-        margin-bottom: 35px;
+        margin-bottom: 25px;
         height: 30px;
-        line-height: 30px;
-        font-size: 12px; }
+        font-size: 13px; }
 
 .bottomBtn {
   position: fixed;

@@ -1,6 +1,12 @@
 $(document).ready(function() {
   // 从本地存储中获取用户当前余额
   $('.title .right').html('￥' + localStorage.price);
+  // 读取会话存储中的single键名，判断是否应当将"余额支付"放出来
+  console.log(sessionStorage.getItem('single'));
+  if(sessionStorage.getItem('single') != 'true') {
+  	$('.pay').first().remove();
+  	$('.pay .right').addClass('default');
+  }
 
   $('ul').delegate('.pay', 'click', function(e) {
     // 找到当前点击的元素，先将所有背景图变为未选中状态，后将

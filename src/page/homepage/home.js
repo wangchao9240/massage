@@ -1,6 +1,6 @@
 	$("").ready(function(){
 		//第一次进入页面时，是首页还是个人中心页
-		if(localStorage.homeSwitch === 'true'){//个人中心页显示
+		if(sessionStorage.homeSwitch === 'true'){//个人中心页显示
 			
 			$(".container").css('display','none');
 			$(".my_contain").css('display','block');
@@ -19,19 +19,22 @@
 			$(".yuyue").css('color','#f27c7c');
 			
 		}
-		
+		 var arr=[];//存放症状id的数组
 		//				轮播图
 		$.ajax({
-            url:"banner.json",
+            url:"http://192.168.3.170/tuina/api.php?s=/system/Weichart/getBanner",
             type:"get",
             dataType:"json",
+//          jsonp:'callback',  
+//          jsonpCallback:"successCallback",
             success: function(data){
-                $(data).each(function(i) {
-                    //console.log(this.url);
-                    $(".swiper-wrapper").append("<li class='swiper-slide'><a href='#'><img src="+this.url+" /></a></li>");
+            	
+            	//轮播图----》开始
+                $(data.lunbo).each(function(i) {
+                    $(".swiper-wrapper").append("<li class='swiper-slide'><a href='http://"+this.content_url+"'><img src='http://192.168.3.170/tuina"+this.img_url+"' /></a></li>");
 	
                 });
-                
+                //swiper插件
                 var swiper = new Swiper('.swiper-container', {
 			        pagination: '.swiper-pagination',
 			        nextButton: '.swiper-button-next',
@@ -43,41 +46,14 @@
 			        autoplayDisableOnInteraction: false,
 			        loop:true
 			    });
-//	                // 轮播图插件
-//					$('.flexslider').flexslider({
-//				        animation: "slide",
-//				        slideshowSpeed: 3000,
-//				        touch: true, //是否支持触屏滑动
-//				        pauseOnHover: true,
-//				        //触屏滑动后继续自动轮播
-//				        before: function(slider) {
-//				           // slider.pause();
-//				            slider.play();
-//				        }
-//	  				});
-
-
-            },
-            error: function() {
-     		alert('失败');
-			}
-        });
-
-			
-//			症状选择
-			 var arr=[];
-			
-			$.ajax({
-                url:"zhengZhuang.json",
-                type:"get",
-                dataType:"json",
-                success: function(data){
-                    //console.log(data);
-               		for(var i=0;i<3;i++){
+			    //轮播图----》结束
+			    
+				//九种症状的选择----》开始
+				for(var i=0;i<3;i++){
                			$(".choose").append("<div class='choose_row'></div>");
                			for(var j=0;j<3;j++){
                				var num=i*3+j;
-               				$(".choose_row").last().append("<div class='li_svg1' zhengzhuangID="+num+"><img src='"+data[num].url+"'/><span>"+data[num].zhengZhuang+"</span></div>");
+               				$(".choose_row").last().append("<div class='li_svg1' zhengzhuangID="+data.yuyue[num].id+"><img src='http://192.168.3.170/tuina"+data.yuyue[num].img_url+"'/><span>"+data.yuyue[num].name+"</span></div>");
                			}
                		}
 
@@ -127,9 +103,9 @@
 	         				$(this).removeClass('li_svg4').addClass('li_svg3');            				
 	         			}
 					}
-      	        
+      	        console.log(arr);
+				sessionStorage.diseaseID=arr;
 				});
-				
 				
 				//判断边是否可以小于一像素,如果小于的话加类名hairlines	
 				if (window.devicePixelRatio && devicePixelRatio >= 2) { //设备像素比
@@ -144,12 +120,14 @@
 				  }
 				  document.body.removeChild(testElem);
 				}
-			
-                },
-                error: function() {
-         			alert('失败');
-   				}
-            });
+				//九种症状的选择----》结束
+            },
+            error: function() {
+     		alert('失败');
+			}
+        });
+
+		
         //在线预约按钮    
         $(".checkbt").click(function() {
 		    // --------------------------->>>>>>>>>>ajax post数据
@@ -160,25 +138,39 @@
   	        }else{
   	        	alert("请选择症状");
   	        }
-	    });	    
-        //公司介绍、专家介绍、线上培训
+	    });	
+	    //公司简介
 		$.ajax({
-        url:"company.json",
+        url:"http://192.168.3.170/tuina/api.php?s=/system/Weichart/getCompany",
         type:"get",
         dataType:"json",
         success: function(data) {
         	console.log(data);
-       		$(data).each(function() {
-       			$('.show_ul').append("<li><a href=''><img src='"+this.url+"'/><span>"+this.detail+"</span></a></li>");
-       		});
-       		$('.show_ul li').eq(0).find("a").attr('href',"##");
-       		$('.show_ul li').eq(1).find("a").attr('href',"../expertList/expertList.html");
-       		$('.show_ul li').eq(2).find("a").attr('href',"../trainOnline/trainOnline.html");
+        	$('.show_ul li').eq(0).find("a").attr('href','http://'+data.content_url);
         },
         error: function() {
- 		alert('失败');
+   		alert('失败');
 		}
-    	});    
+    	}); 
+    	
+        //公司介绍、专家介绍、线上培训
+//		$.ajax({
+//      url:"company.json",
+//      type:"get",
+//      dataType:"json",
+//      success: function(data) {
+//      	console.log(data);
+//     		$(data).each(function() {
+//     			$('.show_ul').append("<li><a href=''><img src='"+this.url+"'/><span>"+this.detail+"</span></a></li>");
+//     		});
+//     		$('.show_ul li').eq(0).find("a").attr('href',"##");
+//     		$('.show_ul li').eq(1).find("a").attr('href',"../expertList/expertList.html");
+//     		$('.show_ul li').eq(2).find("a").attr('href',"../trainOnline/trainOnline.html");
+//      },
+//      error: function() {
+// 		alert('失败');
+//		}
+//  	});    
 		
   	        	
 //		个人中心头像和昵称
@@ -215,7 +207,7 @@
 				
 				$("html,body").animate({scrollTop:0}, 1);
 				
-				localStorage.homeSwitch='false'; 
+				sessionStorage.homeSwitch='false'; 
 			});
 			$(".my").click(function() {
 				$(".my img").attr('src','../../assets/14.png');
@@ -227,7 +219,7 @@
 				$(".my_contain").css('display','block');
 				$("html,body").animate({scrollTop:0}, 1);
 				
-				localStorage.homeSwitch='true'; 
+				sessionStorage.homeSwitch='true'; 
 			});
 			
 	

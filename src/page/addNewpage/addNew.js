@@ -4,10 +4,10 @@ $("").ready(function() {
 	
 	//读取地址栏参数，判断是从地址管理进入的还是从订单页进入
 	if (GetQueryString('default') == 'true') {
-		//读取 
+		//从订单页进入，订单页显示的是默认地址，读取 默认地址
 		str = localStorage.parentInfo; 
 	} else {
-		//读取 
+		//从地址管理进入，读取 编辑地址
 		str = localStorage.editAdd; 
 	}
 	 
@@ -43,15 +43,18 @@ $("").ready(function() {
 				address2:$(".dizhi").val(),
 				phone:$(".newphone").val()
 			};
-			//如果是新增地址，从地址栏获取id存到parentInfo
+			//如果是新增地址，从地址栏获取id,放进parentInfo里
 			if (GetQueryString('new') == 'true') {
 				parentInfo.addressid = GetQueryString('addLen');
 			}
+			//存入到本地存储编辑的地址（editAdd）
 			localStorage.editAdd = JSON.stringify(parentInfo);
-			// 如果localStorage里有editAdd，
+			// 如果localStorage里有地址，并且编辑的地址id跟默认的地址id相同，保存到默认地址
 			if (str) {
 				if (JSON.parse(str).addressid == JSON.parse(localStorage.parentInfo).addressid) {
 					localStorage.parentInfo = JSON.stringify(parentInfo);
+				}else{
+					
 				}
 			}
 			window.history.back();
